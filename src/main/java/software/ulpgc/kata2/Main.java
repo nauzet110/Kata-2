@@ -1,13 +1,18 @@
 package software.ulpgc.kata2;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args){
-        String str = "Hola mundo";
-        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(bytes));
-        System.out.println(new String(bytes, StandardCharsets.UTF_8));
+    public static void main(String[] args) throws IOException {
+        File file = new File("document.txt");
+        try (InputStream is = new FileInputStream(file)){
+            byte[] bytes = is.readAllBytes();
+            System.out.println(new String(bytes));
+        }
     }
 }
