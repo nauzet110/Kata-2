@@ -1,13 +1,16 @@
 package software.ulpgc.kata2;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args){
-        String str = "Hola mundo";
-        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(bytes));
-        System.out.println(new String(bytes, StandardCharsets.UTF_8));
+    public static void main(String[] args) throws IOException {
+        File file = new File("document.txt");
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+            while (true){
+                String line = reader.readLine();
+                if ( line == null) break;
+                System.out.println(line);
+            }
+        }
     }
 }
